@@ -1,5 +1,10 @@
 
-default: license
+default: readme license
+
+readme:
+	@echo "Recompiling README ..."
+	readmix --compile --markdown README.rx
+	@echo "    Done."
 
 license:
 	@echo "Recompiling LICENSE ..."

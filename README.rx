@@ -1,0 +1,10 @@
+
+# Top million websites
+This repository contains data on the `color` and `fonts` used on the Top 1 million websites on the internet.
+
+
+## License
+{{ "LICENSE.md" | File }}
+
+
+{{ giveCredit() }}
