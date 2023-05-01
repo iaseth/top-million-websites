@@ -1,0 +1,14 @@
+{
+  "name": "top-million-websites",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "iaseth",
+  "homepage": "https://github.com/iaseth/top-million-websites",
+  "repository": "iaseth/top-million-websites",
+  "license": "MIT"
+}
