@@ -1,13 +1,10 @@
 
-raw/
-nextdocs/
-src/
-temp/
-templates/
+/cache/
+/src/
+/logos/
+/meta/
+/palettes/
+/png/
 
-generate.py
-hooklist.txt
-PREADME.md
+*.py
 Makefile
-
-hooks.min.json
