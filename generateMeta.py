@@ -2,22 +2,32 @@ import json
 import os
 
 import requests
+from bs4 import BeautifulSoup
 
 CSV_PATH = "raw/top-1m.csv"
 
 
 def sanitize(ch):
-	return ch if ch.isalpha() else "-"
+	return ch if ch.isalnum() else "-"
 
 
 def downloadMeta(website):
 	website = website.lower()
+	websiteURL = "https://" + website
 	codeName = "".join([sanitize(ch) for ch in website])
 	htmlPath = f"cache/{codeName}.html"
+
 	if os.path.isfile(htmlPath):
 		print(f"\tFound: {htmlPath}")
 	else:
-		print(f"\tNot found: {htmlPath}")
+		try:
+			print(f"\tDownloading {websiteURL} ...")
+			res = requests.get(websiteURL, timeout=5)
+			with open(htmlPath, "w") as f:
+				f.write(res.text)
+			print(f"\t\tSaved: {htmlPath}")
+		except Exception as e:
+			return
 
 
 def main():
@@ -29,7 +39,7 @@ def main():
 			print(f"{idx}. {website}")
 			downloadMeta(website)
 
-			if lineNumber >= 10:
+			if lineNumber >= 1000:
 				break
 			else:
 				lineNumber += 1
