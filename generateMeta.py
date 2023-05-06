@@ -5,6 +5,7 @@ import requests
 from bs4 import BeautifulSoup
 
 CSV_PATH = "raw/top-1m.csv"
+session = requests.session()
 
 
 def sanitize(ch):
@@ -22,11 +23,14 @@ def downloadMeta(website):
 	else:
 		try:
 			print(f"\tDownloading {websiteURL} ...")
-			res = requests.get(websiteURL, timeout=5)
+			res = session.get(websiteURL, timeout=5)
 			with open(htmlPath, "w") as f:
 				f.write(res.text)
 			print(f"\t\tSaved: {htmlPath}")
 		except Exception as e:
+			with open(htmlPath, "w") as f:
+				f.write("")
+			print(f"\t\tSaved empty file: {htmlPath}")
 			return
 
 
