@@ -20,6 +20,9 @@ def downloadMeta(website):
 
 	if os.path.isfile(htmlPath):
 		print(f"\tFound: {htmlPath}")
+		if os.path.getsize(htmlPath) == 0:
+			print(f"\t\tFile is empty!")
+			return
 	else:
 		try:
 			print(f"\tDownloading {websiteURL} ...")
@@ -33,6 +36,15 @@ def downloadMeta(website):
 			print(f"\t\tSaved empty file: {htmlPath}")
 			return
 
+	soup = BeautifulSoup(open(htmlPath), "lxml")
+	metaTags = soup.find_all("meta")
+	ogImage = soup.find("meta", attrs={"property": "og:image"})
+	if ogImage:
+		print(ogImage)
+	for metaTag in metaTags:
+		# print(metaTag)
+		pass
+
 
 def main():
 	with open(CSV_PATH) as file:
@@ -43,7 +55,7 @@ def main():
 			print(f"{idx}. {website}")
 			downloadMeta(website)
 
-			if lineNumber >= 1000:
+			if lineNumber >= 10:
 				break
 			else:
 				lineNumber += 1
